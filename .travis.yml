@@ -1,0 +1,34 @@
+language: node_js
+node_js: stable
+
+before_install:
+# - npm install -g hexo
+- npm install -g hexo-cli
+- npm upgrade --global yarn
+
+install:
+- npm install
+- npm install hexo-deployer-git --save
+
+script:
+- hexo clean
+- hexo generate
+
+after_success:
+  - cd ./public
+  - git init
+  - git config user.name "izhexi"
+  - git config user.email "zust_cy@163.com"
+  - git add .
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force "https://izhexi:${GHToken}@${GH_REF}" master:master
+   
+# E: Build LifeCycle
+os: osx
+
+branches:
+  only:
+    - source
+env:
+ global:
+   - GH_REF: github.com/izhexi/izhexi.github.io.git
