@@ -16,6 +16,7 @@ script:
 
 after_success:
   - cd ./public
+  - echo izhexi.com > CNAME
   - git init
   - git config user.name "izhexi"
   - git config user.email "zust_cy@163.com"
