@@ -4,7 +4,7 @@ node_js: stable
 before_install:
 # - npm install -g hexo
 - npm install -g hexo-cli
-- npm upgrade --global yarn
+# - npm upgrade --global yarn
 
 install:
 - npm install
