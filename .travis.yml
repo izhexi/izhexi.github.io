@@ -24,7 +24,7 @@ after_success:
   - git push --force "https://izhexi:${GHToken}@${GH_REF}" master:master
    
 # E: Build LifeCycle
-os: osx
+# os: osx
 
 branches:
   only:
