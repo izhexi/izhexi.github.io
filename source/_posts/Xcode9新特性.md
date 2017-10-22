@@ -1,19 +1,26 @@
 ---
-title: Xcode9及iOS11新特性iPhoneX适配实战
+title: Xcode9新特性
 date: 2017-10-22
 tags: iOS、XCode
 category: iOS
 ---
+ 
+
+### 题外话
 
-[Toc]
+随着iOS 1011 的正式推送，新版开发工具Xcode9也相应的更新了。官网对新版XCode9对此一波牛B吹上天，就目前使用来说，还是很多bug的，比如一个`.m`实现文件中如果`IBOutlet`太多的话，那么修改和编码这个`.m`文件简直就是噩梦，动一下卡一分钟，甚至直接Crash。之前版本的Xcode还在继续使用的 `IBOutlet`左边小圆点是实心，代表这个`IBOutlet`有与`IB`文件有连线，点击可以跳转到相应的`IB`文件中相应的控件处，现在打开IB文件才会有实心圆点，否则`基本`都是空心圆。使用中也遇到多次不明原因的Crash，不过这一版的很多功能还是相当贴心的，也很强大！等Apple更新吧。
 
+言归正传。
 ### Xcode9新特性
 
 #### Compatibility-兼容性
     Xcode 9.0需要运行MacOS Sierra 10.12.4或更高版本的Mac。
+    想使用Xcode9，先升级Mac系统吧。
 
 #### Simulator-模拟器
 1. 多个并发模拟器。同时运行多个模拟器。
+        
+        这个可以说是开发者调试程序的福音啊，以后就可以在不同系统，不同机型上同时进行对比，调试美滋滋~~~
 2. 从地图，照片和Safari与模拟器共享信息。
 3. 添加了关闭窗口或退出模拟器后运行模拟器的选项，以便与命令行工具的simctl命令更好地集成xcrun。
 4. 录制模拟器的视频。
@@ -32,7 +39,7 @@ category: iOS
 
 6. <font color =#ff5959>支持Markdown。</font>
 
-    _举个🌰：_ 下面一段代码，在使用QuitHelp功能时，呈现MarkDown书写的注释
+    _举个🌰：_ 下面一段代码，在使用QuicklyHelp功能时，呈现MarkDown书写的注释
     ```
     /**
         ### 这是一段注释 ###
@@ -47,7 +54,7 @@ category: iOS
         let count = sum(num1: 1.0, num2: 2.0) 
     ```
     ![](/img/markdownComment.png)
-
+介绍这个功能，主要是觉得如果团队规范代码格式的话，书写着可以在写注释的时候更有帮助，让使用者能得到查看系统级别API的体验。
 #### Debugging 
 
 1. iOS和tvOS设备的网络调试。(需要手机与电脑在统一网络上)
@@ -91,6 +98,8 @@ category: iOS
 在设备和模拟器上并行运行测试。
 为测试配置语言和区域。
 发送“全部清除”电子邮件通知。
+
+之前版本的Xcode也有类似的功能，但是需要单独下载Xcode Server程序来进行项目的集成。现在已经集成到Xcode9.
 
 #### Project Modernization（项目现代化）
 1. 当您打开一个项目时，Xcode对其进行评估，以查看是否应更新任何设置。此功能提供了一个简单的方法来确保您的项目符合最新的SDK和最佳做法。
@@ -272,7 +281,7 @@ Swift 4和Swift 3，Swift 4和Swift 3目标的一个编译器可以在同一个�
 
 2. 用于设备使用的模型编译。
 
-[官网详细介绍](https://developer.apple.com/xcode/)
+[官网What's new in Xcode11](https://developer.apple.com/xcode/)
 
  
 
