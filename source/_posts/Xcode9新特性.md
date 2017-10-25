@@ -1,7 +1,7 @@
 ---
 title: Xcode9新特性
 date: 2017-10-22
-tags: iOS、XCode
+tags: iOS
 category: iOS
 ---
  
@@ -39,7 +39,7 @@ category: iOS
 
 6. <font color =#ff5959>支持Markdown。</font>
 
-    _举个🌰：_ 下面一段代码，在使用QuicklyHelp功能时，呈现MarkDown书写的注释
+    _举个🌰：_ 下面一段代码，在使用QuickHelp功能时，呈现MarkDown书写的注释
     ```
     /**
         ### 这是一段注释 ###
