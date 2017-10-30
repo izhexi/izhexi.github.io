@@ -128,10 +128,12 @@ iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适�
 #### 请求定位框不弹出
 在iOS 11有些应用在请求定位时，未能弹出系统请求权限的对话框。
 
+#### 返回按钮位置偏移问题
+iOS 11的的leftBarButtonItem 或者右边都距离边距20像素。
+
 #### 其他问题
 1. 使用`YYKit`的大图预览控件`YYPhotoGroupView`，dismiss的时候，有些页面会抖一下。
-
-2. 
+ 
 ### 一笑泯恩仇
 既然已经知道了iOS 11初出江湖的各种套路和带来的血雨腥风。那就春风化雨，见招拆招了。
 #### navigationBar 问题。
@@ -163,12 +165,63 @@ iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适�
 #### 页面跳动问题
 参照内容下沉问题解决。
 
-其他资料：
+#### 按钮偏移问题
+iOS 11后，navigationBar新增了`contentView`来承载开发者添加的`barButton`。左右两边新增了20像素。现在很几种解决方案。如果只是想要调节返回按钮，可以直接使用系统的API:
+```objc
+@property(nullable,nonatomic,strong) UIImage *backIndicatorImage;
+@property(nullable,nonatomic,strong) UIImage *backIndicatorTransitionMaskImage;
+```
+但是这样的处理方式，在有多个按钮的使用情景下就引起问题。20个像素还是存在的。
+还有调解`UIButton`的`imageEdgeInsets`的，其实也也会出现多按钮的时候，布局问题。
+[比如这篇帖子](http://m.blog.csdn.net/zhaotao0617/article/details/78063485)。
+也有的在`push`和`pop`的时候进行设置的。修改约束会引起有些约束丢失。[也有重写drawRect的](http://www.jianshu.com/p/383cdad95a32)。
+
+其实不需要这么麻烦。新建一个类，继承自`UINavigationBar`，然后重写`layoutSubviews`，如果是ios11，设置`contentView`的`layoutMargins`为需要的值，之前的版本就执行`super`。
+核心代码如下：
+```objc
+@interface CustomNavigationBar:UINavigationBar
+@end
+
+
+const CGFloat LeftFiexSpace = 0;
+const CGFloat RightFiexSpace = 8.0;
+
+@implementation CustomNavigationBar
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    // 修正 ios 11 左右两边的边距
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
+        self.layoutMargins = UIEdgeInsetsZero;
+        for (UIView *subview in self.subviews) {
+            if ([NSStringFromClass(subview.class) containsString:@"ContentView"]) {
+                subview.layoutMargins = UIEdgeInsetsMake(0, LeftFiexSpace, 0, RightFiexSpace);
+                [self layoutIfNeeded];
+            }
+        }
+    }
+}
+@end
+```
+
+在生成`NavigationController`的地方使用`KVC`将原来的`NavigationBar`替换成自己的.
+```objc
+ UINavigationController *nvc = [super initWithRootViewController:rootViewController];    
+    CSNavigationBar *naviBar = [[CustomNavigationBar alloc] init];
+    [nvc setValue:naviBar forKey:@"navigationBar"];
+```
+
+
+### 最后
+
+如果有写得不对的欢迎指正，有更高好的解决方法，也欢迎交流。
+
+### 参考文章
 
 [苹果官网适配视频教程](https://developer.apple.com/videos/play/wwdc2017/204/)
 
-[你可能需要为你的APP适配iOS11
-](http://wetest.qq.com/lab/view/326.html)此篇基本上官方视频的文字版
+[如何设置返回按钮](http://www.jianshu.com/p/0103cd689cfa)
+
+[你可能需要为你的APP适配iOS11](http://wetest.qq.com/lab/view/326.html)此篇基本上是官方视频的文字版
 
 
 
