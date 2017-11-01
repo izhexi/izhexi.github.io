@@ -4,6 +4,17 @@ date: 2017-10-25
 tags: [iOS,iOS 11 ,Xcode9]
 category: iOS 
 ---
+### 题外话
+这是一次公司内部技术分享会的内容，内容共分为三个部分：
+ - Xcode9新特性
+ - iOS 11 适配
+ - iPhone X适配
+ 
+ 这是第二部分，如有需要请持续关注。
+第一部分[Xcode9新特性](https://juejin.im/post/59f834805188252c224d4cca)
+
+言归正传
+
 ### 掀起江湖恩怨
 iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适配iOS 11都晚了。好在还在Beta阶段我司技术大牛达叔第一时间体验了一把，并仔细的跑了一遍播放端APP`触手TV`和录制端APP`触手录`，除了有一个由第三方库`WebViewJavascriptBridgeBase`引起的严重crash，两个APP在iOS 11下基本没什么问题，发现的问题已经被达叔提前fixed了。所以组里一直没有进行做适配工作，而是把精力放在了最近的大版本开发上。观察发现，直接从AppStore下载的应用，在iOS 11上跑起来是没有什么问题的，如果使用Xcode 9  Building后在运行，就或多或少的出现问题。因为Xcode 9 的Base SDKS是基于iOS 11的。所以还是需要进行适配的。
 
