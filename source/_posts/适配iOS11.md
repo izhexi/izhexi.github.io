@@ -11,7 +11,7 @@ category: iOS
  - iPhone X适配
  
  这是第二部分，如有需要请持续关注。
-第一部分[Xcode9新特性](https://juejin.im/post/59f834805188252c224d4cca)
+第一部分[Xcode9新特性](/category/XCode9新特性)
 
 言归正传
 

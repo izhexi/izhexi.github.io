@@ -14,8 +14,8 @@ category: iOS
  
 这是第三部分。这里我不在重复前两部分的内容，用到的知识点会直接使用，比如`safeAreaInsets`。今天的适配默认已经适配`iOS 11`。
 
-第一部分：[Xcode9新特性](59f834805188252c224d4cca)
-第二部分：[iOS 11 适配](https://juejin.im/post/59f836ac51882561a209c641)
+第一部分：[Xcode9新特性](/category/XCode9新特性)
+第二部分：[iOS 11 适配](/category/适配iOS11)
 言归正传
 
 ### 简单介绍 iPhone X
