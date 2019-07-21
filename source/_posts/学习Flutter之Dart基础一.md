@@ -1,8 +1,8 @@
 ---
 title: 学习Flutter之Dart基础（一）
-date:2019-07-22
-categaries: Flutter
-tags: [Flutter, Dart ,iOS]
+date: 2019-07-22
+tags: [iOS,Flutter ,Dart]
+category: Flutter 
 ---
 ## Dart
 
@@ -10,7 +10,7 @@ tags: [Flutter, Dart ,iOS]
 
 `return type`  ` functionName（paramName: value）{` 
 
-```//函数体```
+`//函数体`
 
 code ...
 
@@ -44,7 +44,7 @@ code ...
 
 `${表达式}`是占位符（插值）表达式，`{}`可以省略。如果表达式的结果是一个对象，则默认调用对象的`toString()`方法来获取字符串。
 
-使用三个单引号` ``` `或者双引号`"""`来定义多行字符串。
+使用三个单引号 \`\`\` 或者双引号`"""`来定义多行字符串。
 
 
 
@@ -62,10 +62,12 @@ code ...
 
 `List`默认是可变的，不可变`List`使用`const`修饰。`const`修饰的`List`，在比如在进行`add`操作时，编译器抛出异常：
 
-```dart
+
+``` dart
+
 Uncaught exception:
 Unsupported operation: add
-​```
+```
 
 
 
