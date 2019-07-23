@@ -1,7 +1,8 @@
 ---
 title: 自定义tableviewCell分割线的一些小技巧
 date: 2016-03-05 
-tags: iOS基础 iOS
+tags: iOS
+categories: iOS基础
 ---
 
 如果只是设置分割线，那么系统提供的API就可以实现了。

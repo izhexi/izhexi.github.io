@@ -1,7 +1,8 @@
 ---
 title: Translucent与edgesForExtendedLayout和automaticallyAdjustsScrollViewInsets对布局的影响
 date: 2016-02-13 21:09:08
-tags: iOS基础
+tags: iOS
+categories: iOS基础
 ---
 `Translucent`与`edgesForExtendedLayout`和`automaticallyAdjustsScrollViewInsets` 对布局的影响
 
