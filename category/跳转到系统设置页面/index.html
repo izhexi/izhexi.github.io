@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,iOS基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整理了各种系统设置的跳转地址：ios8之前系统中各种设置项的url链接   在代码中调用即可跳转到设置页面的对应项。12NSURL*url=[NSURL URLWithString:@&amp;quot;prefs:root=WIFI&amp;quot;]; [[UIApplication sharedApplication] openURL:url]; 可选项  WIFI prefs:root=WIFI">
+<meta name="keywords" content="iOS,iOS基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跳转到系统设置页面">
+<meta property="og:url" content="http://izhexi.com/category/跳转到系统设置页面/index.html">
+<meta property="og:site_name" content="小火炉">
+<meta property="og:description" content="整理了各种系统设置的跳转地址：ios8之前系统中各种设置项的url链接   在代码中调用即可跳转到设置页面的对应项。12NSURL*url=[NSURL URLWithString:@&amp;quot;prefs:root=WIFI&amp;quot;]; [[UIApplication sharedApplication] openURL:url]; 可选项  WIFI prefs:root=WIFI">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-09T15:08:23.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跳转到系统设置页面">
+<meta name="twitter:description" content="整理了各种系统设置的跳转地址：ios8之前系统中各种设置项的url链接   在代码中调用即可跳转到设置页面的对应项。12NSURL*url=[NSURL URLWithString:@&amp;quot;prefs:root=WIFI&amp;quot;]; [[UIApplication sharedApplication] openURL:url]; 可选项  WIFI prefs:root=WIFI">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://izhexi.com/category/跳转到系统设置页面/">
+
+
+
+
+
+  <title>跳转到系统设置页面 | 小火炉</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小火炉</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最怕一生碌碌无为，还安慰自己平凡可贵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhexi.com/category/跳转到系统设置页面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小火炉-运">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火炉">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">跳转到系统设置页面</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-03T20:52:58+00:00">
+                2016-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS基础/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/category/跳转到系统设置页面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="category/跳转到系统设置页面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整理了各种系统设置的跳转地址：<br>ios8之前系统中各种设置项的url链接   <br>在代码中调用即可跳转到设置页面的对应项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSURL*url=[NSURL URLWithString:@&quot;prefs:root=WIFI&quot;]; </span><br><span class="line">[[UIApplication sharedApplication] openURL:url];</span><br></pre></td></tr></table></figure></p>
+<p>可选项</p>
+<ul>
+<li><p>WIFI prefs:root=WIFI  </p>
+</li>
+<li><p>个人热点 prefs:root=INTERNET_TETHERING  </p>
+</li>
+<li><p>蜂窝设置 prefs:root=MOBILE_DATA_SETTINGS_ID  </p>
+</li>
+<li><p>隐私 prefs:root=Privacy  </p>
+</li>
+<li><p>隐私-相机 prefs:root=Privacy&amp;path=CAMERA  </p>
+</li>
+<li><p>隐私-相册 prefs:root=Privacy&amp;path=PHOTOS  </p>
+</li>
+<li><p>隐私-定位服务 prefs:root=LOCATION_SERVICES  </p>
+</li>
+<li><p>通用 prefs:root=General&amp;path  </p>
+</li>
+<li><p>VPN prefs:root=VPN  </p>
+</li>
+<li><p>关于 prefs:root=General&amp;path=About </p>
+</li>
+<li><p>辅助功能 prefs:root=General&amp;path=ACCESSIBILITY  </p>
+</li>
+<li><p>飞行模式 prefs:root=AIRPLANE_MODE  </p>
+</li>
+<li><p>自动锁屏时间 prefs:root=General&amp;path=AUTOLOCK  </p>
+</li>
+<li><p>用量 prefs:root=General&amp;path=USAGE  </p>
+</li>
+<li><p>亮度 prefs:root=Brightness  </p>
+</li>
+<li><p>蓝牙 prefs:root=General&amp;path=Bluetooth  </p>
+</li>
+<li><p>日期和时间 prefs:root=General&amp;path=DATE_AND_TIME  </p>
+</li>
+<li><p>Facetime设置 prefs:root=FACETIME  </p>
+</li>
+<li><p>键盘设置 prefs:root=General&amp;path=Keyboard  </p>
+</li>
+<li><p>Icloud prefs:root=CASTLE  </p>
+</li>
+<li><p>备份 prefs:root=CASTLE&amp;path=STORAGE_AND_BACKUP  </p>
+</li>
+<li><p>语言与地区设置 prefs:root=General&amp;path=INTERNATIONAL  </p>
+</li>
+<li><p>账户设置 prefs:root=ACCOUNT_SETTINGS  </p>
+</li>
+<li><p>音乐 prefs:root=MUSIC  </p>
+</li>
+<li><p>EQ均衡器 prefs:root=MUSIC&amp;path=EQ  </p>
+</li>
+<li><p>设置 prefs:root=  </p>
+</li>
+<li><p>备忘录 prefs:root=NOTES  </p>
+</li>
+<li><p>通知 prefs:root=NOTIFICATIONS_ID  </p>
+</li>
+<li><p>电话设置 prefs:root=Phone  </p>
+</li>
+<li><p>照片与相机设置 prefs:root=Photos  </p>
+</li>
+<li><p>还原 prefs:root=General&amp;path=Reset  </p>
+</li>
+<li><p>铃声设置 prefs:root=Sounds&amp;path=Ringtone  </p>
+</li>
+<li><p>Safari prefs:root=Safari  </p>
+</li>
+<li><p>声音 prefs:root=Sounds  </p>
+</li>
+<li><p>系统更新 prefs:root=General&amp;path=SOFTWARE_UPDATE_LINK  </p>
+</li>
+<li><p>STORE 设置 prefs:root=STORE  </p>
+</li>
+<li><p>视频设置 prefs:root=VIDEO  </p>
+</li>
+<li><p>壁纸设置 prefs:root=Wallpaper </p>
+</li>
+</ul>
+<h5 id="其他项（可能有重复）"><a href="#其他项（可能有重复）" class="headerlink" title="其他项（可能有重复）"></a>其他项（可能有重复）</h5><ul>
+<li>About — prefs:root=General&amp;path=About </li>
+<li>Accessibility — prefs:root=General&amp;path=ACCESSIBILITY </li>
+<li>Airplane Mode On — prefs:root=AIRPLANE_MODE </li>
+<li>Auto-Lock — prefs:root=General&amp;path=AUTOLOCK </li>
+<li>Brightness — prefs:root=Brightness </li>
+<li>Bluetooth — prefs:root=General&amp;path=Bluetooth </li>
+<li>Date &amp; Time — prefs:root=General&amp;path=DATE_AND_TIME </li>
+<li>FaceTime — prefs:root=FACETIME </li>
+<li>General — prefs:root=General </li>
+<li>Keyboard — prefs:root=General&amp;path=Keyboard </li>
+<li>iCloud — prefs:root=CASTLE </li>
+<li>iCloud Storage &amp; Backup — prefs:root=CASTLE&amp;path=STORAGE_AND_BACKUP </li>
+<li>International — prefs:root=General&amp;path=INTERNATIONAL </li>
+<li>Location Services — prefs:root=LOCATION_SERVICES </li>
+<li>Music — prefs:root=MUSIC </li>
+<li>Music Equalizer — prefs:root=MUSIC&amp;path=EQ </li>
+<li>Music Volume Limit — prefs:root=MUSIC&amp;path=VolumeLimit </li>
+<li>Network — prefs:root=General&amp;path=Network </li>
+<li>Nike + iPod — prefs:root=NIKE_PLUS_IPOD </li>
+<li>Notes — prefs:root=NOTES </li>
+<li>Notification — prefs:root=NOTIFICATIONS_ID </li>
+<li>Phone — prefs:root=Phone </li>
+<li>Photos — prefs:root=Photos </li>
+<li>Profile — prefs:root=General&amp;path=ManagedConfigurationList </li>
+<li>Reset — prefs:root=General&amp;path=Reset </li>
+<li>Safari — prefs:root=Safari </li>
+<li>Siri — prefs:root=General&amp;path=Assistant </li>
+<li>Sounds — prefs:root=Sounds </li>
+<li>Software Update — prefs:root=General&amp;path=SOFTWARE_UPDATE_LINK </li>
+<li>Store — prefs:root=STORE </li>
+<li>Twitter — prefs:root=TWITTER </li>
+<li>Usage — prefs:root=General&amp;path=USAGE </li>
+<li>VPN — prefs:root=General&amp;path=Network/VPN </li>
+<li>Wallpaper — prefs:root=Wallpaper </li>
+<li>Wi-Fi — prefs:root=WIFI </li>
+<li>prefs:root=INTERNET_TETHERING </li>
+</ul>
+<p>有些已经修改，上面内容不起作用可以参考下面的 </p>
+<ul>
+<li><p>Siri: prefs:root=General&amp;path=SIRI </p>
+</li>
+<li><p>Personal Hotspot: prefs:root=INTERNET_TETHERING </p>
+</li>
+<li><p>Location Services: prefs:root=LOCATION_SERVICES </p>
+</li>
+<li><p>Cellular/Mobile Data: prefs:root=MOBILE_DATA_SETTINGS_ID </p>
+</li>
+<li><p>Sounds: prefs:root=Sounds </p>
+</li>
+<li><p>Notifications: prefs:root=NOTIFICATIONS_ID </p>
+</li>
+<li><p>Background App Refresh: prefs:root=General&amp;path=AUTO_CONTENT_DOWNLOAD </p>
+</li>
+<li><p>Battery (iOS8): prefs:root=General&amp;path=USAGE/BATTERY_USAGE </p>
+</li>
+<li><p>Battery (updated for iOS 9): prefs:root=BATTERY_USAGE </p>
+</li>
+<li><p>VPN: prefs:root=General&amp;path=VPN </p>
+</li>
+<li><p>Settings App: prefs:root </p>
+</li>
+<li><p>SIM Apps: prefs:root=Phone&amp;path=SIMToolkit </p>
+</li>
+<li><p>Display &amp; Brightness: prefs:root=Display&amp;Brightness </p>
+</li>
+<li><p>CallerID : prefs:root=Phone&amp;path=CallerID </p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS基础/" rel="tag"># iOS基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/category/Xctool打包脚本/" rel="next" title="Xctool打包脚本">
+                <i class="fa fa-chevron-left"></i> Xctool打包脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/category/Xcode9新特性/" rel="prev" title="Xcode9新特性">
+                Xcode9新特性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小火炉-运</p>
+              <p class="site-description motion-element" itemprop="description">一个iOSer的自留地</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#其他项（可能有重复）"><span class="nav-number">1.</span> <span class="nav-text">其他项（可能有重复）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小火炉-运</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://izhexi-com-1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://izhexi.com/category/跳转到系统设置页面/';
+          this.page.identifier = 'category/跳转到系统设置页面/';
+          this.page.title = '跳转到系统设置页面';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://izhexi-com-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

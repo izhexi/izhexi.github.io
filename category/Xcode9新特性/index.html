@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,iOS 11,Xcode9,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content=" 题外话随着iOS 1011 的正式推送，新版开发工具Xcode9也相应的更新了。官网对新版XCode9对此一波牛B吹上天，就目前使用来说，还是很多bug的，比如一个.m实现文件中如果IBOutlet太多的话，那么修改和编码这个.m文件简直就是噩梦，动一下卡一分钟，甚至直接Crash。之前版本的Xcode还在继续使用的IBOutlet左边小圆点是实心，代表这个IBOutlet有与IB文件有连线，">
+<meta name="keywords" content="iOS,iOS 11,Xcode9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode9新特性">
+<meta property="og:url" content="http://izhexi.com/category/Xcode9新特性/index.html">
+<meta property="og:site_name" content="小火炉">
+<meta property="og:description" content=" 题外话随着iOS 1011 的正式推送，新版开发工具Xcode9也相应的更新了。官网对新版XCode9对此一波牛B吹上天，就目前使用来说，还是很多bug的，比如一个.m实现文件中如果IBOutlet太多的话，那么修改和编码这个.m文件简直就是噩梦，动一下卡一分钟，甚至直接Crash。之前版本的Xcode还在继续使用的IBOutlet左边小圆点是实心，代表这个IBOutlet有与IB文件有连线，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://izhexi.com/img/markdownComment.png">
+<meta property="og:updated_time" content="2019-11-09T15:08:23.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xcode9新特性">
+<meta name="twitter:description" content=" 题外话随着iOS 1011 的正式推送，新版开发工具Xcode9也相应的更新了。官网对新版XCode9对此一波牛B吹上天，就目前使用来说，还是很多bug的，比如一个.m实现文件中如果IBOutlet太多的话，那么修改和编码这个.m文件简直就是噩梦，动一下卡一分钟，甚至直接Crash。之前版本的Xcode还在继续使用的IBOutlet左边小圆点是实心，代表这个IBOutlet有与IB文件有连线，">
+<meta name="twitter:image" content="http://izhexi.com/img/markdownComment.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://izhexi.com/category/Xcode9新特性/">
+
+
+
+
+
+  <title>Xcode9新特性 | 小火炉</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小火炉</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最怕一生碌碌无为，还安慰自己平凡可贵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhexi.com/category/Xcode9新特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小火炉-运">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火炉">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Xcode9新特性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T00:00:00+00:00">
+                2017-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/category/Xcode9新特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="category/Xcode9新特性/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p>
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>随着iOS 1011 的正式推送，新版开发工具Xcode9也相应的更新了。官网对新版XCode9对此一波牛B吹上天，就目前使用来说，还是很多bug的，比如一个<code>.m</code>实现文件中如果<code>IBOutlet</code>太多的话，那么修改和编码这个<code>.m</code>文件简直就是噩梦，动一下卡一分钟，甚至直接Crash。之前版本的Xcode还在继续使用的<code>IBOutlet</code>左边小圆点是实心，代表这个<code>IBOutlet</code>有与<code>IB</code>文件有连线，点击可以跳转到相应的<code>IB</code>文件中相应的控件处，现在打开IB文件才会有实心圆点，否则<code>基本</code>都是空心圆。使用中也遇到多次不明原因的Crash，不过这一版的很多功能还是相当贴心的，也很强大！等Apple更新吧。<br>这是一次公司内部技术分享会的内容，内容共分为三个部分：</p>
+<ul>
+<li>Xcode9新特性</li>
+<li>iOS 11 适配</li>
+<li>iPhone X适配<br>这是第一个部分，如有需要请持续关注。</li>
+</ul>
+<p>言归正传。</p>
+<h3 id="Xcode9新特性"><a href="#Xcode9新特性" class="headerlink" title="Xcode9新特性"></a>Xcode9新特性</h3><h4 id="Compatibility-兼容性"><a href="#Compatibility-兼容性" class="headerlink" title="Compatibility-兼容性"></a>Compatibility-兼容性</h4><pre><code>Xcode 9.0需要运行MacOS Sierra 10.12.4或更高版本的Mac。
+想使用Xcode9，先升级Mac系统吧。
+</code></pre><h4 id="Simulator-模拟器"><a href="#Simulator-模拟器" class="headerlink" title="Simulator-模拟器"></a>Simulator-模拟器</h4><ol>
+<li><p>多个并发模拟器。同时运行多个模拟器。</p>
+<pre><code>这个可以说是开发者调试程序的福音啊，以后就可以在不同系统，不同机型上同时进行对比，调试美滋滋~~~
+</code></pre></li>
+<li>从地图，照片和Safari与模拟器共享信息。</li>
+<li>添加了关闭窗口或退出模拟器后运行模拟器的选项，以便与命令行工具的simctl命令更好地集成xcrun。</li>
+<li>录制模拟器的视频。</li>
+<li><font color="#ff5959">通过选择帮助&gt;模拟器帮助获取帮助。</font>
+
+</li>
+</ol>
+<h4 id="Source-Editing-（-源代码编辑器）"><a href="#Source-Editing-（-源代码编辑器）" class="headerlink" title="Source Editing （ 源代码编辑器）"></a>Source Editing （ 源代码编辑器）</h4><ol>
+<li><p>更快，更多功能查找和更换。</p>
+</li>
+<li><p>快速滚动任何大小的文件。</p>
+</li>
+<li><p>直接操纵代码结构，如令牌和块。</p>
+</li>
+<li><p>重新设计源代码管理的集成。</p>
+</li>
+<li><p>重新设计错误和警告消息的介绍。</p>
+</li>
+<li><font color="#ff5959">支持Markdown。</font>
+
+<p> <em>举个🌰：</em> 下面一段代码，在使用QuickHelp功能时，呈现MarkDown书写的注释</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    ### 这是一段注释 ###</span><br><span class="line">    #### 使用markdown格式 ####</span><br><span class="line">    * 参数1 double 类型</span><br><span class="line">    * 参数2 double 类型</span><br><span class="line">*/</span><br><span class="line">    func sum (num1:Double,num2:Double) -&gt;Double &#123;</span><br><span class="line">        return num1 + num2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let count = sum(num1: 1.0, num2: 2.0)</span><br></pre></td></tr></table></figure>
+<p> <img src="/img/markdownComment.png" alt><br>介绍这个功能，主要是觉得如果团队规范代码格式的话，书写着可以在写注释的时候更有帮助，让使用者能得到查看系统级别API的体验。</p>
+<h4 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h4></li>
+<li><p>iOS和tvOS设备的网络调试。(需要手机与电脑在统一网络上)</p>
+<pre><code>通过WiFi或有线网络调试iOS和tvOS设备。
+通过Bonjour连接或输入IP地址。
+第一次需要插入iOS设备才能启用网络调试。
+</code></pre></li>
+<li><p>主线程检查器。</p>
+<pre><code>检测未在主线程上进行的AppKit，UIKit和WebKit方法调用。
+在调试期间自动启用，并且可以在方案编辑器的“诊断”选项卡中禁用。
+主线程检查器与Swift和C语言一起使用。
+通过深度过滤来增强Breakpoint导航器。
+添加了修改断点的可视指示符。
+扩展视图调试器以显示视图控制器，并使用SceneKit和SpriteKit视图。
+增强iOS电能表。
+</code></pre></li>
+</ol>
+<h4 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h4><ol>
+<li>跨Swift，C，Objective-C和C ++文件的全局重命名。</li>
+<li>重构。重构内置于编辑体验之中，并可跨Swift，Objective-C，Interface Builder和许多其他文件类型。</li>
+<li>基于Swift4的兼容性，可以兼容构建Swift3</li>
+<li>提供简单的fix-it 功能。</li>
+<li>自动补全缺少的协议方法</li>
+<li>补全缺少的方法实现</li>
+<li>提取变量. 方法和表达式</li>
+<li>自动生成switch语句的case</li>
+</ol>
+<h4 id="Xcode-Server"><a href="#Xcode-Server" class="headerlink" title="Xcode Server"></a>Xcode Server</h4><p>新建在Xcode服务器。</p>
+<p>在偏好配置中，配置Xcode服务器和BOT权限设置。<br>增加了双因素身份验证支持。<br>更新的机器人功能</p>
+<p>支持自动和手动配置工作流。<br>传递额外的参数xcodebuild。<br>在设备和模拟器上并行运行测试。<br>为测试配置语言和区域。<br>发送“全部清除”电子邮件通知。</p>
+<p>之前版本的Xcode也有类似的功能，但是需要单独下载Xcode Server程序来进行项目的集成。现在已经集成到Xcode9.</p>
+<h4 id="Project-Modernization（项目现代化）"><a href="#Project-Modernization（项目现代化）" class="headerlink" title="Project Modernization（项目现代化）"></a>Project Modernization（项目现代化）</h4><ol>
+<li><p>当您打开一个项目时，Xcode对其进行评估，以查看是否应更新任何设置。此功能提供了一个简单的方法来确保您的项目符合最新的SDK和最佳做法。</p>
+</li>
+<li><p>打开问题导航器以查看是否需要更新项目中的任何内容。您也可以在项目导航器中选择项目，然后选择编辑器&gt;验证设置。</p>
+</li>
+<li><p>如果问题导航器列出了现代化问题，请单击该问题以查看一个对话框，以解释应该进行的更新，并允许您执行任何或所有更新。</p>
+</li>
+<li><p>单击执行更改后，无论是否选择进行所有更改，Xcode都不会再次显示警告。要重新运行检查，请在项目导航器中选择项目，然后选择编辑器&gt;验证设置。</p>
+</li>
+</ol>
+<h4 id="Instruments"><a href="#Instruments" class="headerlink" title="Instruments"></a>Instruments</h4><p>用于在跟踪文档的图形区域中固定图形的新拆分视图。</p>
+<p>添加了所有策略，并将策略选择器移动到跟踪文档顶部的新工具栏。</p>
+<p>增强型金属调试仪。</p>
+<p>金属系统跟踪VR支持查看事件，如合成器活动，姿势查询等</p>
+<h4 id="Interface-Builder"><a href="#Interface-Builder" class="headerlink" title="Interface Builder"></a>Interface Builder</h4><pre><code>增加了对资产目录使用命名颜色的支持。
+增加了对新边距和基线视图约束的支持。
+添加了对自动布局安全区域指南的支持。
+增加了对全屏WatchOS应用程序的支持。
+</code></pre><h4 id="Metal-2-Support"><a href="#Metal-2-Support" class="headerlink" title="Metal 2 Support"></a>Metal 2 Support</h4><ol>
+<li>Capture API。</li>
+</ol>
+<p>在你的代码中定义明确的捕获边界。<br>使用新MTLCaptureManager类和新MTLCaptureScope协议来编程设置，管理和触发捕获边界。<br>使用扩展的Xcode GPU Capture UI手动启动和停止捕获。您还可以使用Xcode来捕获应用程序中定义的API边界。</p>
+<ol start="2">
+<li>GPU计数器。</li>
+</ol>
+<p>分析有关特定GPU捕获的详细分析指标。在iOS和tvOS中，GPU计数器显示为命令编码器的时间线;在macOS中，GPU计数器显示为绘制或调度调用的时间线。</p>
+<p>检查渲染或计算流水线阶段的运行时性能，例如顶点着色器，片段着色器，计算内核等。</p>
+<p>比较每个流水线阶段花费的GPU时间量，以查找您的性能瓶颈。</p>
+<ol start="3">
+<li>GPU备注。</li>
+</ol>
+<p>在金属着色语言代码中查找优化机会。</p>
+<p>在着色器编辑器中调试特定于设备的运行时问题。</p>
+<p>遵循直接的解决方案和指示来改善您的代码。</p>
+<ol start="4">
+<li>智能过滤。</li>
+</ol>
+<p>通过键入到调试导航器来查找特定的调试信息。当您键入和突出显示匹配的文本（例如资源，像素格式，功能名称，对象标签等）时，Xcode会动态显示建议。</p>
+<p>通过从预定义的Metal对象菜单中选择选项来过滤搜索结果。</p>
+<p>使用多个匹配条件的多个过滤器。</p>
+<ol start="5">
+<li>VR支持。</li>
+</ol>
+<p>查看VR提交和左眼/右眼提交的表面。</p>
+<p>添加了纹理检查，用于检查渲染目标中各个像素的值，如颜色，alpha，深度等。</p>
+<p>添加检查输出顶点属性到缓冲区编辑器。</p>
+<p>添加数据提示支持金属对象，如纹理，缓冲区和采样器。</p>
+<h4 id="Source-Control"><a href="#Source-Control" class="headerlink" title="Source Control"></a>Source Control</h4><p>新的源代码管理导航器，用于查看当前工作空间的分支，标签和远程存储库。</p>
+<p>新的源代码管理检查器显示所选导航器项目的详细信息。</p>
+<p>分支历史的新编辑器，包括一个方便导航的跳转杆。</p>
+<p>文件差异的新的并行编辑器。</p>
+<p>更容易和更快地访问常见任务。</p>
+<p>GitHub帐户集成，轻松浏览和一键创建项目及相关的GitHub资源库。</p>
+<h4 id="Swift-（新的Xcode-9-Swift-4）"><a href="#Swift-（新的Xcode-9-Swift-4）" class="headerlink" title="Swift （新的Xcode 9 -Swift 4）"></a>Swift （新的Xcode 9 -Swift 4）</h4><p>Swift 4和Swift 3，Swift 4和Swift 3目标的一个编译器可以在同一个项目中编译。</p>
+<p>改进的迁移者体验，仅支持将选定目标迁移到Swift 4。</p>
+<p>更快的通用代码和减少的代码大小。</p>
+<h4 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h4><p>并行测试装置</p>
+<p>对XCTest添加了新的APIs</p>
+<p>控制和捕捉截图。<br>团体测试活动。<br>测试附件。<br>在特有界面清理测试状态。<br>在一个UI测试中应用多个应用程序。<br>使用指定的语言和区域运行测试。</p>
+<h4 id="General（其他功能）"><a href="#General（其他功能）" class="headerlink" title="General（其他功能）"></a>General（其他功能）</h4><ol>
+<li><p>更新了使用plist文件定义文本宏的方式。</p>
+<pre><code>为项目中的用户，项目或特定用户定义文本宏。
+
+自定义新的文件头。
+
+有关更多信息。
+</code></pre></li>
+<li><p>更新了索引引擎，包括在编译文件时编制索引的能力。</p>
+</li>
+<li><p>设备窗口被分成用于设备和模拟器的单独窗格。</p>
+</li>
+</ol>
+<h4 id="Asset-Catalogs"><a href="#Asset-Catalogs" class="headerlink" title="Asset Catalogs"></a>Asset Catalogs</h4><ol>
+<li><p>命名颜色支持。</p>
+</li>
+<li><p>添加了广泛的应用程序图标。</p>
+</li>
+<li><p>为App图标集添加了更大的iOS营销。</p>
+</li>
+<li><p>添加了保留图像矢量数据以选择动态类型缩放的选项。</p>
+</li>
+<li><p>增加了HEIF图像的支持。</p>
+</li>
+</ol>
+<h4 id="Building-and-Linking"><a href="#Building-and-Linking" class="headerlink" title="Building and Linking"></a>Building and Linking</h4><ol>
+<li><p>添加了一个在Swift中编写的新构建系统的预览。</p>
+</li>
+<li><p>提供更高的可靠性。</p>
+</li>
+<li><p>捕获许多项目配置问题。</p>
+</li>
+<li><p>提高整体构建系统性能。</p>
+</li>
+<li><p>注意，构建系统性能不包括构建系统使用的编译器，链接器和其他工具。</p>
+</li>
+<li><p>目前可选，并将成为未来版本的Xcode的默认值。</p>
+</li>
+<li><p>要选择项目或工作区的新构建系统，请选择“文件”&gt;“项目设置”或“文件”&gt;“工作区设置”，然后选择“构建系统”类型的“新建构建系统（预览）”。</p>
+</li>
+<li><p>有关与现有项目兼容性的说明，请参阅Xcode版本说明。</p>
+</li>
+</ol>
+<h4 id="Capabilities"><a href="#Capabilities" class="headerlink" title="Capabilities"></a>Capabilities</h4><ol>
+<li><p>iOS热点和多路径TCP的新配置。</p>
+</li>
+<li><p>新的网络配置，包括内容过滤，代理DNS查询以及代理TCP和UDP连接。</p>
+</li>
+<li><p>用于watchOS的新背景模式用于录音和转弯方向。</p>
+</li>
+<li><p>tvOS背景提取的新模式。</p>
+</li>
+</ol>
+<h4 id="Core-ML（-核心ML编辑器）"><a href="#Core-ML（-核心ML编辑器）" class="headerlink" title="Core ML（ 核心ML编辑器）"></a>Core ML（ 核心ML编辑器）</h4><ol>
+<li><p>为模型生成强类型接口。</p>
+</li>
+<li><p>用于设备使用的模型编译。</p>
+</li>
+</ol>
+<p><a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">官网What’s new in Xcode11</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS-11/" rel="tag"># iOS 11</a>
+          
+            <a href="/tags/Xcode9/" rel="tag"># Xcode9</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/category/跳转到系统设置页面/" rel="next" title="跳转到系统设置页面">
+                <i class="fa fa-chevron-left"></i> 跳转到系统设置页面
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/category/适配iOS11/" rel="prev" title="适配iOS11">
+                适配iOS11 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小火炉-运</p>
+              <p class="site-description motion-element" itemprop="description">一个iOSer的自留地</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题外话"><span class="nav-number">1.</span> <span class="nav-text">题外话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xcode9新特性"><span class="nav-number">2.</span> <span class="nav-text">Xcode9新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compatibility-兼容性"><span class="nav-number">2.1.</span> <span class="nav-text">Compatibility-兼容性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simulator-模拟器"><span class="nav-number">2.2.</span> <span class="nav-text">Simulator-模拟器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Source-Editing-（-源代码编辑器）"><span class="nav-number">2.3.</span> <span class="nav-text">Source Editing （ 源代码编辑器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Debugging"><span class="nav-number">2.4.</span> <span class="nav-text">Debugging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重构"><span class="nav-number">2.5.</span> <span class="nav-text">重构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xcode-Server"><span class="nav-number">2.6.</span> <span class="nav-text">Xcode Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Project-Modernization（项目现代化）"><span class="nav-number">2.7.</span> <span class="nav-text">Project Modernization（项目现代化）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Instruments"><span class="nav-number">2.8.</span> <span class="nav-text">Instruments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interface-Builder"><span class="nav-number">2.9.</span> <span class="nav-text">Interface Builder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Metal-2-Support"><span class="nav-number">2.10.</span> <span class="nav-text">Metal 2 Support</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Source-Control"><span class="nav-number">2.11.</span> <span class="nav-text">Source Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Swift-（新的Xcode-9-Swift-4）"><span class="nav-number">2.12.</span> <span class="nav-text">Swift （新的Xcode 9 -Swift 4）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Testing"><span class="nav-number">2.13.</span> <span class="nav-text">Testing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#General（其他功能）"><span class="nav-number">2.14.</span> <span class="nav-text">General（其他功能）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Asset-Catalogs"><span class="nav-number">2.15.</span> <span class="nav-text">Asset Catalogs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Building-and-Linking"><span class="nav-number">2.16.</span> <span class="nav-text">Building and Linking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Capabilities"><span class="nav-number">2.17.</span> <span class="nav-text">Capabilities</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Core-ML（-核心ML编辑器）"><span class="nav-number">2.18.</span> <span class="nav-text">Core ML（ 核心ML编辑器）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小火炉-运</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://izhexi-com-1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://izhexi.com/category/Xcode9新特性/';
+          this.page.identifier = 'category/Xcode9新特性/';
+          this.page.title = 'Xcode9新特性';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://izhexi-com-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

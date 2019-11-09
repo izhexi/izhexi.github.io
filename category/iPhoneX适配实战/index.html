@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,iOS 11,Xcode9,iPhoneX,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="题外话网上适配的帖子特别多，大多数都是官方教程的中文版。这篇文章主要记录触手TVAPP在适配中遇到的问题。这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配  这是第三部分。这里我不在重复前两部分的内容，用到的知识点会直接使用，比如safeAreaInsets。今天的适配默认已经适配iOS 11。 第一部分：Xcode9新特性第二">
+<meta name="keywords" content="iOS,iOS 11,Xcode9,iPhoneX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iPhoneX适配实战">
+<meta property="og:url" content="http://izhexi.com/category/iPhoneX适配实战/index.html">
+<meta property="og:site_name" content="小火炉">
+<meta property="og:description" content="题外话网上适配的帖子特别多，大多数都是官方教程的中文版。这篇文章主要记录触手TVAPP在适配中遇到的问题。这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配  这是第三部分。这里我不在重复前两部分的内容，用到的知识点会直接使用，比如safeAreaInsets。今天的适配默认已经适配iOS 11。 第一部分：Xcode9新特性第二">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/5de16370cf29c9bab93f94d023d20153">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/cbe599ccf0c91b21e307aa1404013b7b">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/bd37d683907c1c8693c5934dca00cdca">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/e70a8eb95218c12c9370a6c0880e9d1e">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/b3b43a763dae0e64aeb412e39dadbda3">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/a2bacc4fbdbc4facfe54967955f70504">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/9641f99d9ae835306f9e611c2b8c5b82">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/60965dfe528444d3823d58af3387806a">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/23c892dd81232a0109435ad7cabb8660">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/e8cb398c2623b4b69860f5ec248d6fc4">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/1b60fa9efe38afa7191ff969e1d4eb63">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/47cedc569537bb72a792c167fad37981">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/9f7719c9d96c8a916ada251144994d70">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/a36657d3305a385e80785b155024191d">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/ba2e361d31995977ba40a47f18dc818b">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/8ff38aaeb6e7b7816a96a3d7433c83e6">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/44075a86f3c1cd143a3395057b52604e">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/1/9c1fad17d5fd11e7c6c520484ffc8442">
+<meta property="og:updated_time" content="2019-11-09T15:08:23.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iPhoneX适配实战">
+<meta name="twitter:description" content="题外话网上适配的帖子特别多，大多数都是官方教程的中文版。这篇文章主要记录触手TVAPP在适配中遇到的问题。这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配  这是第三部分。这里我不在重复前两部分的内容，用到的知识点会直接使用，比如safeAreaInsets。今天的适配默认已经适配iOS 11。 第一部分：Xcode9新特性第二">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/10/31/5de16370cf29c9bab93f94d023d20153">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://izhexi.com/category/iPhoneX适配实战/">
+
+
+
+
+
+  <title>iPhoneX适配实战 | 小火炉</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小火炉</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最怕一生碌碌无为，还安慰自己平凡可贵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhexi.com/category/iPhoneX适配实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小火炉-运">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火炉">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iPhoneX适配实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T00:00:00+00:00">
+                2017-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/category/iPhoneX适配实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="category/iPhoneX适配实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>网上适配的帖子特别多，大多数都是官方教程的中文版。这篇文章主要记录<code>触手TV</code>APP在适配中遇到的问题。<br>这是一次公司内部技术分享会的内容，内容共分为三个部分：</p>
+<ul>
+<li>Xcode9新特性</li>
+<li>iOS 11 适配</li>
+<li>iPhone X适配</li>
+</ul>
+<p>这是第三部分。这里我不在重复前两部分的内容，用到的知识点会直接使用，比如<code>safeAreaInsets</code>。今天的适配默认已经适配<code>iOS 11</code>。</p>
+<p>第一部分：<a href="/category/XCode9新特性">Xcode9新特性</a><br>第二部分：<a href="/category/适配iOS11">iOS 11 适配</a><br>言归正传</p>
+<h3 id="简单介绍-iPhone-X"><a href="#简单介绍-iPhone-X" class="headerlink" title="简单介绍 iPhone X"></a>简单介绍 iPhone X</h3><h4 id="ScreenSize"><a href="#ScreenSize" class="headerlink" title="ScreenSize"></a>ScreenSize</h4><p>iPhone X具有超视网膜屏。逻辑分辨率为<code>375pt X 812pt</code>。屏幕尺寸5.8英寸，分辨率为<code>1125 x 2436</code>。四个角有圆角、顶部有齐刘海（传感器槽）、底部有<code>HomeIndicator</code>。<br><code>StatusBar</code>导航栏高度<code>44pt</code>。<code>tabBar</code>高度为<code>83pt</code>.<br><img src="https://user-gold-cdn.xitu.io/2017/10/31/5de16370cf29c9bab93f94d023d20153" alt="ScreenSize"></p>
+<h4 id="界面呈现最佳实践"><a href="#界面呈现最佳实践" class="headerlink" title="界面呈现最佳实践"></a>界面呈现最佳实践</h4><ul>
+<li>保持页面元素在安全区域内。</li>
+<li>布局元素不被圆角切割。</li>
+<li>布局元素不被齐刘海遮挡。</li>
+<li>布局元素不占用<code>statusBar</code>。<code>statusBar</code>部分有供系统使用的边缘手势。</li>
+<li>有交互的控件不被<code>HomeIndicator</code>重叠。</li>
+</ul>
+<p>如下图</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/cbe599ccf0c91b21e307aa1404013b7b" alt="超过安全区域"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/bd37d683907c1c8693c5934dca00cdca" alt="statusBar占用"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/e70a8eb95218c12c9370a6c0880e9d1e" alt="与HomeIndicator重叠"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/b3b43a763dae0e64aeb412e39dadbda3" alt="statusBar手势"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/a2bacc4fbdbc4facfe54967955f70504" alt="横屏布局"></p>
+<h3 id="开始适配工作"><a href="#开始适配工作" class="headerlink" title="开始适配工作"></a>开始适配工作</h3><p>先看看未适配前运行的结果</p>
+<ol>
+<li>启动后，没有充满屏幕，上下部分有黑边。</li>
+<li><p>中间的 <code>+</code>号按钮下沉。<br><img src="https://user-gold-cdn.xitu.io/2017/10/31/9641f99d9ae835306f9e611c2b8c5b82" alt="首页"></p>
+</li>
+<li><p>“我的”页面内容下沉。<br> 这个问题属于iOS 11适配问题，上一篇我们讲过，这里不赘述。<br><img src="https://user-gold-cdn.xitu.io/2017/10/31/60965dfe528444d3823d58af3387806a" alt="我的页面"></p>
+</li>
+</ol>
+<p>先把第一个问题解决了。因为iPhone X的分辨率问题，APP在启动的时候，没有相应的图片资源。解决这个问题只需对<code>LaunchImage</code>新增<code>1125 x 2346</code>启动屏图片。或者启动项从<code>Launch Images Source</code>-&gt;asset变更为<code>LaunchScreenFile</code>。指定为<code>LaunchScreen</code>的<code>xib</code>或者<code>.storyboard</code>。</p>
+<p>运行再看效果：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/10/31/23c892dd81232a0109435ad7cabb8660" alt="首页重叠"><br>发现问题：</p>
+<ol>
+<li>顶部已经与<code>statusBar</code>重叠了。<br> 尝试点击，按钮上半部分不响应事件。<code>statusBar</code>的View在顶部，事件被<code>statusBar</code>截获了。这种方式也不符合UI规范。</li>
+<li>其他页面基本都是这样的问题。</li>
+<li>中间按钮在push到其他页面回来后，偶尔会往下掉。</li>
+</ol>
+<p>在上一篇我们讲了一般使用<code>IUNavigationBar</code>的三种方式。触手使用的是第三种–完全自定义的view。因为<code>触手TV</code>的界面风格里，很多页面都是首页这个样式的，顶部是tab样式的，页面是联动的。所以我们有专门的一个控件来封装这个风格的页面。所以很久以前的工程里为了方便，直接弃用了系统的<code>NavigationBar</code>。<br>做出修改之前，我们先来看看整个工程的view层级关系：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/1/e8cb398c2623b4b69860f5ec248d6fc4" alt="原来的APP结构"><br>从结构中可以看出，整个APP里共用同一个NavigationController，这种做饭，有缺点也有优点，优点就是针对未适配之前的页面，隐藏导航栏，在源头就可以直接设置。在需要push的地方，除极个别被modal出来的Controller，直接可用<code>self.navigationController</code>获得导航属性。缺点就是不能针对定制页面控制导航栏的显示与影藏。可能你会想在<code>viewWillAppear</code>和<code>ViewWillDisappear</code>里去控制隐藏和显示。考虑到多个视图控制器的执行时序先后对导航栏进行设置，结果就不一定是我们想要的了。<br>为了更好的使用系统导航栏，又能离散的控制导航栏的隐藏，我们将APP的结构改为这样。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/1/1b60fa9efe38afa7191ff969e1d4eb63" alt="修改后的APP结构"><br>显而易见这样的结构更合理一些。我个人比较推荐使用底部<code>tab</code>形式的UI，都使用这样的结构。</p>
+<p>准备工作做完了，开始适配导航栏。<br>在原来的<code>MainViewController：UITabBarcontroller</code>里有这么一段代码<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewWillAppear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillAppear:animated];</span><br><span class="line">    [<span class="keyword">self</span>.navigationController setNavigationBarHidden:<span class="literal">YES</span> animated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码就是在源头把整个APP里的导航栏隐藏的关键代码。现在可以直接删掉。<br>在基类的<code>ViewControoler</code>里，新增<code>bool</code>属性<code>hiddenNavigationBar</code>。在需要隐藏导航栏的页面，设置为<code>true</code>。<br>在<code>NavigationController</code>的基类里实现<code>UINavigationControllerDelegate</code>方法,根据控制器的<code>hiddenNavigationBar</code>属性，是否隐藏导航栏。不建议在<code>viewWillAppear</code>和<code>viewWillDisappear</code>设置，这种方式在视觉上的表现不是太好，也不怎么优雅。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)navigationController:(<span class="built_in">UINavigationController</span>*)navigationController willShowViewController:(<span class="built_in">UIViewController</span>*)viewController animated:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>([viewController isKindOfClass:[CSViewController <span class="keyword">class</span>]])&#123;</span><br><span class="line">        CSViewController *vc = (CSViewController *)viewController;</span><br><span class="line">        <span class="keyword">if</span> (vc.navigationBarHidden) &#123;</span><br><span class="line">            [navigationController setNavigationBarHidden:<span class="literal">YES</span> animated:<span class="literal">YES</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (navigationController.navigationBarHidden) &#123;</span><br><span class="line">                [navigationController setNavigationBarHidden:<span class="literal">NO</span> animated:<span class="literal">YES</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们决定使用系统的导航栏，主要原因是为了减少工作量。在原来的页面里，每个xib页面维护了一个自定义的导航栏，这次改动，每个xib文件都需要改一遍，为了一劳永逸的解决这个问题。我们觉得直接向原生控件靠拢，把适配的工作交给系统来完成。其实工作量也没多少，把每个页面的导航栏删掉就可以了。运行后效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/1/47cedc569537bb72a792c167fad37981" alt="导航示例"></p>
+<p>针对于上面提出的中间按钮下沉问题。我们先看看iPhone X上tabBar的View层级关系。<br><img src="https://user-gold-cdn.xitu.io/2017/11/1/9f7719c9d96c8a916ada251144994d70" alt="tabBar"><br>高度是83，下面预留了35给虚拟home键。所以原先的直接添加到<code>UITabBarController</code>，设置frame就有了偏差,为了布局，使用了一个空的<code>TabBarItem</code>作为占位用。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">buttonCenter = [[<span class="built_in">UIButton</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(kScreenWidth / <span class="number">2</span> - <span class="number">30</span>, kScreenHeight - <span class="number">60</span> - offSety, <span class="number">60</span>, <span class="number">60</span>)];</span><br><span class="line">    [buttonCenter setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"ic_main_center.png"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonCenter setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"ic_main_center_p.png"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line">    [buttonCenter addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickedButtonCenter) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:buttonCenter];</span><br></pre></td></tr></table></figure></p>
+<p>解决这个问题，可以在原来的基础上针对iPhone X适配frame。我们没有这么做，而是选择继承<code>UITabbar</code>，重写<code>layoutSubviews</code>。顺便把很多运营需要的逻辑红点也剥离到这里。核心代码如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)layoutSubviews &#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    Class <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">@"UITabBarButton"</span>);</span><br><span class="line">    <span class="built_in">CGFloat</span> width = <span class="keyword">self</span>.width / BarItemCount;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">UIView</span> *view <span class="keyword">in</span> <span class="keyword">self</span>.subviews) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//**</span></span><br><span class="line">    plusButton 就是需要中间的按钮</span><br><span class="line">    */</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> ([view isEqual:<span class="keyword">self</span>.plusButton]) &#123;</span><br><span class="line">            view.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, width, width);</span><br><span class="line">            view.center = <span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.width / <span class="number">2</span>,BarItemCenterY);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([view isKindOfClass:<span class="keyword">class</span>])&#123;</span><br><span class="line">            <span class="comment">//如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置</span></span><br><span class="line">            <span class="built_in">CGRect</span> frame = view.frame;</span><br><span class="line">            <span class="built_in">NSInteger</span> index = view.origin.x / width;</span><br><span class="line">            <span class="built_in">NSInteger</span> originIndex = index;</span><br><span class="line">            <span class="keyword">if</span> (index &gt;= (BarItemCount - <span class="number">1</span>) / <span class="number">2</span>) &#123;</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">CGFloat</span> x = index * width;</span><br><span class="line">            view.frame = <span class="built_in">CGRectMake</span>(x, view.frame.origin.y, width, frame.size.height);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="keyword">self</span> bringSubviewToFront:<span class="keyword">self</span>.plusButton];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在事件响应链里截获点击事件，对超出tabBar的部分支持事件的响应<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="comment">//这一个判断是关键，不判断的话push到其他页面，点击发布按钮的位置也是会有反应的，这样就不好了</span></span><br><span class="line">    <span class="comment">//self.isHidden == NO 说明当前页面是有tabbar的，那么肯定是在导航控制器的根控制器页面</span></span><br><span class="line">    <span class="comment">//在导航控制器根控制器页面，那么我们就需要判断手指点击的位置是否在发布按钮身上</span></span><br><span class="line">    <span class="comment">//是的话让发布按钮自己处理点击事件，不是的话让系统去处理点击事件就可以了</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.isHidden == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="comment">//将当前tabbar的触摸点转换坐标系，转换到发布按钮的身上，生成一个新的点</span></span><br><span class="line">        <span class="built_in">CGPoint</span> newP = [<span class="keyword">self</span> convertPoint:point toView:<span class="keyword">self</span>.plusButton];</span><br><span class="line">        <span class="built_in">CGPoint</span> extendPoint = [<span class="keyword">self</span> convertPoint:point toView:<span class="keyword">self</span>.extendView];</span><br><span class="line">        <span class="comment">//判断如果这个新的点是在发布按钮身上，那么处理点击事件最合适的view就是发布按钮</span></span><br><span class="line">        <span class="keyword">if</span> ( [<span class="keyword">self</span>.plusButton pointInside:newP withEvent:event]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.plusButton;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">//如果点不在发布按钮身上，直接让系统处理就可以了</span></span><br><span class="line">            <span class="keyword">return</span> [<span class="keyword">super</span> hitTest:point withEvent:event];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;<span class="comment">//tabbar隐藏了，那么说明已经push到其他的页面了，这个时候还是让系统去判断最合适的view处理就好了</span></span><br><span class="line">        <span class="keyword">return</span> [<span class="keyword">super</span> hitTest:point withEvent:event];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>目前为止，我们已经解决了上面提出来的问题。<br>在看看其他页面，发现有几个问题。<br>动态详情评论框与home键区域重叠了。<br><img src="https://user-gold-cdn.xitu.io/2017/11/1/a36657d3305a385e80785b155024191d" alt="动态详情评论框"><br>直播页面的弹幕框也是这个问题。<br><img src="https://user-gold-cdn.xitu.io/2017/11/1/ba2e361d31995977ba40a47f18dc818b" alt><br>直播页面横屏下按钮排布问题。<br><img src="https://user-gold-cdn.xitu.io/2017/11/1/8ff38aaeb6e7b7816a96a3d7433c83e6" alt="直播横屏"><br>这些只需要基本都是UED的范畴了，对特定的约束进行调整，使其不遮挡home键。<br>有了第一部分：<a href="59f834805188252c224d4cca">Xcode9新特性</a>的介绍和第二部分：<a href="https://juejin.im/post/59f836ac51882561a209c641" target="_blank" rel="noopener">iOS 11 适配</a>。iPhone X的适配就简单多了。</p>
+<h3 id="使用safeAreaInsets"><a href="#使用safeAreaInsets" class="headerlink" title="使用safeAreaInsets"></a>使用<code>safeAreaInsets</code></h3><p>通篇我们都没有用到<code>safeAreaInsets</code>来进行适配，是应为在IB界面里，<code>safeAreaInsets</code>支持的最低版本为iOS 9.0，我们还需要兼容之前的版本。所以这里没有介绍这种方法。<br>如果需要使用<code>safeAreaInsets</code>，那么在IB文件打开右侧第一个菜单项<code>showfileinspector</code>，勾选<code>User Safe Area Layout Guides</code><br><img src="https://user-gold-cdn.xitu.io/2017/11/1/44075a86f3c1cd143a3395057b52604e" alt="user safe area"><br>在设置约束时，请选择<code>safe area</code>作为<code>secondItem</code>。这样就可以很好的适配所有机型，保证不同机型下，都能做到官方推荐的布局规范了。<br><img src="https://user-gold-cdn.xitu.io/2017/11/1/9c1fad17d5fd11e7c6c520484ffc8442" alt="safe area layout"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS-11/" rel="tag"># iOS 11</a>
+          
+            <a href="/tags/Xcode9/" rel="tag"># Xcode9</a>
+          
+            <a href="/tags/iPhoneX/" rel="tag"># iPhoneX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/category/适配iOS11/" rel="next" title="适配iOS11">
+                <i class="fa fa-chevron-left"></i> 适配iOS11
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/category/ruby升级/" rel="prev" title="ruby升级">
+                ruby升级 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小火炉-运</p>
+              <p class="site-description motion-element" itemprop="description">一个iOSer的自留地</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题外话"><span class="nav-number">1.</span> <span class="nav-text">题外话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单介绍-iPhone-X"><span class="nav-number">2.</span> <span class="nav-text">简单介绍 iPhone X</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScreenSize"><span class="nav-number">2.1.</span> <span class="nav-text">ScreenSize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#界面呈现最佳实践"><span class="nav-number">2.2.</span> <span class="nav-text">界面呈现最佳实践</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始适配工作"><span class="nav-number">3.</span> <span class="nav-text">开始适配工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用safeAreaInsets"><span class="nav-number">4.</span> <span class="nav-text">使用safeAreaInsets</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小火炉-运</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://izhexi-com-1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://izhexi.com/category/iPhoneX适配实战/';
+          this.page.identifier = 'category/iPhoneX适配实战/';
+          this.page.title = 'iPhoneX适配实战';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://izhexi-com-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

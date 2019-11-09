@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,iOS 11,Xcode9,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="题外话这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配 这是第二部分，如有需要请持续关注。第一部分Xcode9新特性   言归正传 掀起江湖恩怨iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适配iOS 11都晚了。好在还在Beta阶段我司技术大牛达叔第一时间体验了一把，并仔细的跑了一遍播放端APP触手TV和录制端">
+<meta name="keywords" content="iOS,iOS 11,Xcode9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="适配iOS11">
+<meta property="og:url" content="http://izhexi.com/category/适配iOS11/index.html">
+<meta property="og:site_name" content="小火炉">
+<meta property="og:description" content="题外话这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配 这是第二部分，如有需要请持续关注。第一部分Xcode9新特性   言归正传 掀起江湖恩怨iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适配iOS 11都晚了。好在还在Beta阶段我司技术大牛达叔第一时间体验了一把，并仔细的跑了一遍播放端APP触手TV和录制端">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/10/31/f8546c3c053d641cb83d758f308716aa">
+<meta property="og:image" content="http://izhexi.com/category/适配iOS11/img/layoutGuide.png">
+<meta property="og:updated_time" content="2019-11-09T15:08:23.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="适配iOS11">
+<meta name="twitter:description" content="题外话这是一次公司内部技术分享会的内容，内容共分为三个部分：  Xcode9新特性 iOS 11 适配 iPhone X适配 这是第二部分，如有需要请持续关注。第一部分Xcode9新特性   言归正传 掀起江湖恩怨iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适配iOS 11都晚了。好在还在Beta阶段我司技术大牛达叔第一时间体验了一把，并仔细的跑了一遍播放端APP触手TV和录制端">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/10/31/f8546c3c053d641cb83d758f308716aa">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://izhexi.com/category/适配iOS11/">
+
+
+
+
+
+  <title>适配iOS11 | 小火炉</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小火炉</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最怕一生碌碌无为，还安慰自己平凡可贵</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://izhexi.com/category/适配iOS11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小火炉-运">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小火炉">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">适配iOS11</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T00:00:00+00:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/category/适配iOS11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="category/适配iOS11/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>这是一次公司内部技术分享会的内容，内容共分为三个部分：</p>
+<ul>
+<li>Xcode9新特性</li>
+<li>iOS 11 适配</li>
+<li><p>iPhone X适配</p>
+<p>这是第二部分，如有需要请持续关注。<br>第一部分<a href="/category/XCode9新特性">Xcode9新特性</a></p>
+</li>
+</ul>
+<p>言归正传</p>
+<h3 id="掀起江湖恩怨"><a href="#掀起江湖恩怨" class="headerlink" title="掀起江湖恩怨"></a>掀起江湖恩怨</h3><p>iOS 11正式版已经来了，作为一个iOS开发者，这意味着没有适配iOS 11都晚了。好在还在Beta阶段我司技术大牛达叔第一时间体验了一把，并仔细的跑了一遍播放端APP<code>触手TV</code>和录制端APP<code>触手录</code>，除了有一个由第三方库<code>WebViewJavascriptBridgeBase</code>引起的严重crash，两个APP在iOS 11下基本没什么问题，发现的问题已经被达叔提前fixed了。所以组里一直没有进行适配工作，而是把精力放在了最近的大版本开发上。观察发现，直接从AppStore下载的应用，在iOS 11上跑起来是没有什么问题的，如果使用Xcode 9  Building后在运行，就或多或少的出现问题。因为Xcode 9 的Base SDKS是基于iOS 11的。所以还是需要进行适配的。</p>
+<h4 id="风云再起"><a href="#风云再起" class="headerlink" title="风云再起"></a>风云再起</h4><p>通过阅览网上适配iOS 11的同行案列，结合<code>触手TV</code>APP实际问题，经过汇总，以下可能是需要适配的点。找到问题的根源，才能帮助我们解决问题。<br>为什么会出现上述问题呢？我们看看iOS 11有些什么新增改动。<br>这里只列出部分以及跟今天主题相关的部分。详情可以看看官网<a href="https://developer.apple.com/library/content/releasenotes/General/WhatsNewIniOS/Articles/iOS_11_0.html" target="_blank" rel="noopener">what’s new in iOS 11</a>。</p>
+<h5 id="UIViewController-与-UIView"><a href="#UIViewController-与-UIView" class="headerlink" title="UIViewController 与 UIView"></a>UIViewController 与 UIView</h5><h6 id="主要变化部分："><a href="#主要变化部分：" class="headerlink" title="主要变化部分："></a>主要变化部分：</h6><ul>
+<li><code>UIViewController</code>废弃<code>LayoutGuide</code>。iOS7之后，为了辅助Autolayout布局系统，Apple新增<code>UILayoutSupport</code>协议。就是被很多人忽略的<code>topLayoutGuide</code>，<code>bottomLayoutGuide</code>。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIViewController</span> (<span class="title">UILayoutSupport</span>)</span></span><br><span class="line"><span class="comment">// These objects may be used as layout items in the NSLayoutConstraint API</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; topLayoutGuide API_DEPRECATED_WITH_REPLACEMENT(<span class="string">"-[UIView safeAreaLayoutGuide]"</span>, ios(<span class="number">7.0</span>,<span class="number">11.0</span>), tvos(<span class="number">7.0</span>,<span class="number">11.0</span>));</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; bottomLayoutGuide API_DEPRECATED_WITH_REPLACEMENT(<span class="string">"-[UIView safeAreaLayoutGuide]"</span>, ios(<span class="number">7.0</span>,<span class="number">11.0</span>), tvos(<span class="number">7.0</span>,<span class="number">11.0</span>));</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>) <span class="built_in">UIEdgeInsets</span> additionalSafeAreaInsets API_AVAILABLE(ios(<span class="number">11.0</span>), tvos(<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+<p>这个两个属性是<code>readonly</code>的，一般我们也用不到，主要作用是辅助Controller的View在布局时知道从哪里开始布局，到什么地方结束布局。在使用SB或者XIB文件布局的时候，可以进行设置，确定开始布局和结束布局的参考点。在iOS 11 已经标记<code>API_DEPRECATED_WITH_REPLACEMENT</code>。取而代之的是<code>UIView</code>新的API<code>safeAreaInsets</code>。<br><img src="https://user-gold-cdn.xitu.io/2017/10/31/f8546c3c053d641cb83d758f308716aa" alt="LayoutGuide" title="LayoutGuide"></p>
+<ul>
+<li><p><code>UIView</code>增加<code>safeAreaInsets:UIEdgeInsets</code>安全区概念。用于替代辅助自动布局的<code>LayoutGuide</code>。安全区域定义了布局View除各种Bar后剩下的可见区域。此属性是<code>readonly</code>的，想要改动，需要操作<code>UIViewController</code>的<code>additionalSafeAreaInsets</code>属性。</p>
+  <font color="red">简单理解就是去除系统的各种Bar以及左右<code>margin（如果有设置过)</code> 后的可用布局区域。</font>
+
+<p>  图中淡蓝色区域即为安全区域:</p>
+</li>
+</ul>
+<p><img src="./img/layoutGuide.png" alt="test"></p>
+<pre><code>如果在View上的控件没有被遮挡，`safeAreaInsets = {(0,0),(0,0)}`分别对应于`（top,left,bottom,right）`。
+假设子ViewA顶部被`navigationBar`遮挡20pt，相应`safeAreaInsets = {(20,0),(0,0)}`。
+
+&lt;font size = 5&gt;注意：如果采用SB、XIB布局UI的，`safeAreaInsets`最低支持版本为iOS 9.0。考虑到兼容性，触手TV是不能使用安全区域的。&lt;/font&gt;
+</code></pre><ul>
+<li><p><code>UIViewController</code>废弃<code>automaticallyAdjustsScrollViewInsets</code>API。这是个bool值属性，描述了是否自动适配scrollView的contentInsets。值为<code>true</code>时，scrollView的内容不会被系统可见的各种bar所遮挡（<code>statusbar</code>、<code>navigationBar</code>，<code>tabBar</code>，<code>toolBar</code>），一般会引起<code>tableView</code>，<code>collectionView</code>，<code>scrollView</code>的content下移bar的高度值个像素。如果不需要自动调整，将值设为<code>false</code>。</p>
+</li>
+<li><p><code>UIViewController</code>新增修改关联<code>View</code>安全区域的API<code>additionalSafeAreaInsets</code>。可对安全区域的值进行增减，满足自定义UI的需求。并提供方法<code>viewSafeAreaInsetsDidChange</code>，用于在安全区域改变后，进行布局的调整。</p>
+</li>
+<li><p>相应的，<code>UIScrollView</code>增加枚举属性<code>contentInsetAdjustmentBehavior</code>，描述<code>scrollView</code>如何调整contentInset（实际是调整<code>adjustedContentInset</code>属性），配合安全区域使用。最后<code>UIscrollView</code>的contentInset值为<code>adjustedContentInset</code>与<code>safeAreaInsets</code>之和。</p>
+<p>  有4个可选值：</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UIScrollViewContentInsetAdjustmentBehavior</span>) &#123;</span><br><span class="line">        <span class="built_in">UIScrollViewContentInsetAdjustmentAutomatic</span>, <span class="comment">//与 automaticallyAdjustsScrollViewInsets 类似</span></span><br><span class="line">        <span class="built_in">UIScrollViewContentInsetAdjustmentScrollableAxes</span>, <span class="comment">// 在滚动的当前轴向上进行自动调整</span></span><br><span class="line">        <span class="built_in">UIScrollViewContentInsetAdjustmentNever</span>,  <span class="comment">//不进行任何的调整</span></span><br><span class="line">        <span class="built_in">UIScrollViewContentInsetAdjustmentAlways</span>, <span class="comment">// contentInset等于View的safeAreaInsets</span></span><br><span class="line">    &#125; API_AVAILABLE(ios(<span class="number">11.0</span>),tvos(<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+<p>  <code>UIScrollViewDelegate</code>新增<code>scrollViewDidChangeAdjustedContentInset</code>方法，当<code>adjustedContentInset</code>改变后通知使用者进行布局调整。</p>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>如果使用SB、XIB布局时启用了安全区域，IB会参考安全区域进行布局。</li>
+<li>布局时没有以安全区域作为参照时，直接设置安全区域，系统并不会对布局做出自适应动作，可以通过安全区域改变回调方法进行调整。</li>
+<li>如果是<code>UIscrollView</code>或子类，如果设置了<code>UIScrollViewContentInsetAdjustmentBehavior</code>不等于<code>UIScrollViewContentInsetAdjustmentNever</code>，系统会自动适配<code>UIScrollView</code>的内容都在安全区域内，保证内容不被各种Bar遮住。</li>
+</ul>
+<h5 id="NavigationBar的改变"><a href="#NavigationBar的改变" class="headerlink" title="NavigationBar的改变"></a>NavigationBar的改变</h5><p><code>NavigationBar</code> 多了个<code>contentView</code>，这个View在开启了大标题时，上面会有个titleLable。<br><code>NavigationBar</code> 的<code>titleView</code>支持自动布局。需要使用者自动撑开添加到上面的View。</p>
+<h5 id="定位权限"><a href="#定位权限" class="headerlink" title="定位权限"></a>定位权限</h5><p>在iOS11，原有的<code>NSLocationAlwaysUsageDeion</code>被降级为<code>NSLocationWhenInUseUsageDeion</code>。<br>在<code>.plist</code>没文件中配置<code>NSLocationAlwaysAndWhenInUseUsageDeion</code>，系统框才会弹出，使用requestAlwaysAuthorization获取权限。</p>
+<h5 id="其他变更"><a href="#其他变更" class="headerlink" title="其他变更"></a>其他变更</h5><ol start="0">
+<li>设置UIBarItem.landscapeImagePhone 与UIBarItem.largeContentSizeImage 来适配在竖屏和横屏下的BarItem图标和双击放大后的图标，如果使用 PDF 资源图，系统会自动从PDF资源图提取相应图标，就不用设置上述属性了。</li>
+<li><p>navigationBar.prefersLargeTitles = true 新增大标题属性，大标题displaymode控制显示枚举：navigationItem.largeTitleDisplayMode<br> 枚举属性：</p>
+<pre><code>- automatic：自动保存上一次设置的值
+- always：总是显示大标题
+- never：不显示
+</code></pre></li>
+<li><p>Navigation集成searchBar。navigationItem.searchController 属性赋值可以集成searchBar在navigationbar下方，navigationItem.hidesSearchBarWhenScrolling属性控制在滚动时是否自动隐藏。</p>
+</li>
+<li><p>确保避免 size 为 0 的自定义view，实现intrinsicContentSize 方法提供默认尺寸。</p>
+</li>
+<li><p>tableview开启开启高度估算（Self-Sizing），设置下面三个属性，使高度估算失效：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tableView.estimatedRowHeight = <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">tableView.estimatedSectionHeaderHeight = <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">tableView.estimatedSectionFooterHeight = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tableview 新增左滑右滑交互。</p>
+</li>
+<li><p>废弃iOS7 以后的layoutMargins，取而代之的是新增的安全区域的概念。<br> 新增directionalLayoutMargins。对应layoutMargins。<br> 新增systemMinimumLayoutMargins，当directionalLayout小于systemMinimumLayoutMargins，使用systemMinimumLayoutMargins。<br> 新增 UIViewController=.viewRespectsSystemMinimumLayoutMargins,默认为FALSE。设为TRUE，可设置任意值。</p>
+</li>
+</ol>
+<h3 id="新仇旧恨"><a href="#新仇旧恨" class="headerlink" title="新仇旧恨"></a>新仇旧恨</h3><p>明白了iOS 11大法，再来看看，这大法带来的各种问题。</p>
+<h4 id="NavigationBar问题。"><a href="#NavigationBar问题。" class="headerlink" title="NavigationBar问题。"></a>NavigationBar问题。</h4><p>一般使用<code>NavigationBar</code>基本有三种手法。</p>
+<ol>
+<li>纯正血统，使用标注控件，不在<code>NavigationBar</code>上添加任何的控件。</li>
+<li>混血，在<code>NavigationBar</code>上有定制的控件。</li>
+<li>毫无血统，完全自定义。隐藏了系统的<code>navigationBar</code>，直接用了View替代。</li>
+</ol>
+<p>针对上面三种情况：</p>
+<ul>
+<li><p>使用第一种姿势的人，很幸运，你不需要进行适配。（估计很少有人不定制）</p>
+</li>
+<li><p>使用第二种姿势的人，可能会有返回按钮、titleView、添加的控件<code>position</code>不正确的问题。</p>
+</li>
+<li><p>使用第三种姿势的人，很好，在非iPhone X上，也没什么大问题。</p>
+</li>
+</ul>
+<h4 id="UIscrollView、UItableView、UICollectionView内容下沉问题。"><a href="#UIscrollView、UItableView、UICollectionView内容下沉问题。" class="headerlink" title="UIscrollView、UItableView、UICollectionView内容下沉问题。"></a>UIscrollView、UItableView、UICollectionView内容下沉问题。</h4><p>升级iOS 11后，发现有些使用<code>UItableView</code>布局的页面，顶部多出来了20pt或者44pt，也或者64pt。也就是顶部可见Bar的高度的总和。<br><code>包括使用MJRefresh引起的问题。也属于这类。</code></p>
+<h4 id="Xcode9-打出的包（iOS-11-SDK）页面卡顿问题"><a href="#Xcode9-打出的包（iOS-11-SDK）页面卡顿问题" class="headerlink" title="Xcode9 打出的包（iOS 11 SDK）页面卡顿问题"></a>Xcode9 打出的包（iOS 11 SDK）页面卡顿问题</h4><p>升级Xcode9 后，你会发现，基于iOS 11打出来的包，tableView滑动的时候，一卡一顿的。</p>
+<h4 id="请求定位框不弹出"><a href="#请求定位框不弹出" class="headerlink" title="请求定位框不弹出"></a>请求定位框不弹出</h4><p>在iOS 11有些应用在请求定位时，未能弹出系统请求权限的对话框。</p>
+<h4 id="返回按钮位置偏移问题"><a href="#返回按钮位置偏移问题" class="headerlink" title="返回按钮位置偏移问题"></a>返回按钮位置偏移问题</h4><p>iOS 11的的leftBarButtonItem 或者右边都距离边距20像素。</p>
+<h4 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h4><ol>
+<li>使用<code>YYKit</code>的大图预览控件<code>YYPhotoGroupView</code>，dismiss的时候，有些页面会抖一下。</li>
+</ol>
+<h3 id="一笑泯恩仇"><a href="#一笑泯恩仇" class="headerlink" title="一笑泯恩仇"></a>一笑泯恩仇</h3><p>既然已经知道了iOS 11初出江湖的各种套路和带来的血雨腥风。那就春风化雨，见招拆招了。</p>
+<h4 id="navigationBar-问题。"><a href="#navigationBar-问题。" class="headerlink" title="navigationBar 问题。"></a>navigationBar 问题。</h4><ul>
+<li>因为<code>NavigationBar</code>引入了<code>AutoLayout</code>，以往的<code>frame</code>方式可能位置有偏差。以前使用<code>CGRectMakeZero</code>自动撑大已经行不通。那么使用自动布局。或者实现下面<code>View</code>的方法，提供默认尺寸。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">CGSize</span>)intrinsicContentSize &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGSizeMake</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加到<code>NavigationBar</code>View可能会出各种问题，尝试添加到<code>contentView</code>上。并设置约束。</li>
+<li>返回按钮问题，请设置好<code>frame</code>在赋值给<code>navigationItem.leftBarButtonItem</code>。</li>
+</ul>
+<h4 id="UIscrollView、UItableView、UICollectionView内容下沉问题"><a href="#UIscrollView、UItableView、UICollectionView内容下沉问题" class="headerlink" title="UIscrollView、UItableView、UICollectionView内容下沉问题"></a>UIscrollView、UItableView、UICollectionView内容下沉问题</h4><p>因为<code>controllerView</code>废弃了<code>automaticallyAdjustsScrollViewInsets</code>，请使用<code>UIScrollViewContentInsetAdjustmentNever</code>来告诉系统，不要调整。或者设置<code>additionalSafeAreaInsets</code>来增加<code>safeAreaInsets</code>来抵消。</p>
+<h4 id="滚动卡顿问题"><a href="#滚动卡顿问题" class="headerlink" title="滚动卡顿问题"></a>滚动卡顿问题</h4><p>因为<code>tableView</code>默认开启<code>Self-Sizing</code>。设置下面三个属性，使高度估算失效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tableView.estimatedRowHeight = 0 </span><br><span class="line">tableView.estimatedSectionHeaderHeight = 0 </span><br><span class="line">tableView.estimatedSectionFooterHeight = 0</span><br></pre></td></tr></table></figure></p>
+<h4 id="请求定位框不弹出-1"><a href="#请求定位框不弹出-1" class="headerlink" title="请求定位框不弹出"></a>请求定位框不弹出</h4><p>在iOSi11，原有的NSLocationAlwaysUsageDeion被降级为NSLocationWhenInUseUsageDeion。因此，在原来项目中使用requestAlwaysAuthorization获取定位权限，而未在plist文件中配置NSLocationAlwaysAndWhenInUseUsageDeion，系统框不会弹出。建议新旧key值都在plist里配置。</p>
+<h4 id="页面跳动问题"><a href="#页面跳动问题" class="headerlink" title="页面跳动问题"></a>页面跳动问题</h4><p>参照内容下沉问题解决。</p>
+<h4 id="按钮偏移问题"><a href="#按钮偏移问题" class="headerlink" title="按钮偏移问题"></a>按钮偏移问题</h4><p>iOS 11后，navigationBar新增了<code>contentView</code>来承载开发者添加的<code>barButton</code>。左右两边新增了20像素。现在很几种解决方案。如果只是想要调节返回按钮，可以直接使用系统的API:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>,<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *backIndicatorImage;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>,<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *backIndicatorTransitionMaskImage;</span><br></pre></td></tr></table></figure></p>
+<p>但是这样的处理方式，在有多个按钮的使用情景下就引起问题。20个像素还是存在的。<br>还有调整<code>UIButton</code>的<code>imageEdgeInsets</code>的，其实也会在多按钮的时候出现布局问题。<br><a href="http://m.blog.csdn.net/zhaotao0617/article/details/78063485" target="_blank" rel="noopener">比如这篇帖子</a>。<br>也有的在<code>push</code>和<code>pop</code>的时候进行设置的。修改约束会引起有些约束丢失。<a href="http://www.jianshu.com/p/383cdad95a32" target="_blank" rel="noopener">也有重写drawRect的</a>。</p>
+<p>其实不需要这么麻烦。新建一个类，继承自<code>UINavigationBar</code>，然后重写<code>layoutSubviews</code>，如果是ios11，设置<code>contentView</code>的<code>layoutMargins</code>为需要的值，之前的版本就执行<code>super</code>。<br>核心代码如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CustomNavigationBar</span>:<span class="title">UINavigationBar</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">CGFloat</span> LeftFiexSpace = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">CGFloat</span> RightFiexSpace = <span class="number">8.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CustomNavigationBar</span></span></span><br><span class="line">- (<span class="keyword">void</span>)layoutSubviews &#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    <span class="comment">// 修正 ios 11 左右两边的边距</span></span><br><span class="line">    <span class="keyword">if</span> (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(<span class="string">@"11.0"</span>)) &#123;</span><br><span class="line">        <span class="keyword">self</span>.layoutMargins = <span class="built_in">UIEdgeInsetsZero</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">UIView</span> *subview <span class="keyword">in</span> <span class="keyword">self</span>.subviews) &#123;</span><br><span class="line">            <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>(subview.class) containsString:<span class="string">@"ContentView"</span>]) &#123;</span><br><span class="line">                subview.layoutMargins = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, LeftFiexSpace, <span class="number">0</span>, RightFiexSpace);</span><br><span class="line">                [<span class="keyword">self</span> layoutIfNeeded];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>在生成<code>NavigationController</code>的地方使用<code>KVC</code>将原来的<code>NavigationBar</code>替换成自己的.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UINavigationController</span> *nvc = [<span class="keyword">super</span> initWithRootViewController:rootViewController];    </span><br><span class="line">   CSNavigationBar *naviBar = [[CustomNavigationBar alloc] init];</span><br><span class="line">   [nvc setValue:naviBar forKey:<span class="string">@"navigationBar"</span>];</span><br></pre></td></tr></table></figure></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>如果有写得不对的欢迎指正，有更高好的解决方法，也欢迎交流。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://developer.apple.com/videos/play/wwdc2017/204/" target="_blank" rel="noopener">苹果官网适配视频教程</a></p>
+<p><a href="http://www.jianshu.com/p/0103cd689cfa" target="_blank" rel="noopener">如何设置返回按钮</a></p>
+<p><a href="http://wetest.qq.com/lab/view/326.html" target="_blank" rel="noopener">你可能需要为你的APP适配iOS11</a>此篇基本上是官方视频的文字版</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS-11/" rel="tag"># iOS 11</a>
+          
+            <a href="/tags/Xcode9/" rel="tag"># Xcode9</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/category/Xcode9新特性/" rel="next" title="Xcode9新特性">
+                <i class="fa fa-chevron-left"></i> Xcode9新特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/category/iPhoneX适配实战/" rel="prev" title="iPhoneX适配实战">
+                iPhoneX适配实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小火炉-运</p>
+              <p class="site-description motion-element" itemprop="description">一个iOSer的自留地</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题外话"><span class="nav-number">1.</span> <span class="nav-text">题外话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掀起江湖恩怨"><span class="nav-number">2.</span> <span class="nav-text">掀起江湖恩怨</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#风云再起"><span class="nav-number">2.1.</span> <span class="nav-text">风云再起</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UIViewController-与-UIView"><span class="nav-number">2.1.1.</span> <span class="nav-text">UIViewController 与 UIView</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#主要变化部分："><span class="nav-number">2.1.1.1.</span> <span class="nav-text">主要变化部分：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NavigationBar的改变"><span class="nav-number">2.1.2.</span> <span class="nav-text">NavigationBar的改变</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定位权限"><span class="nav-number">2.1.3.</span> <span class="nav-text">定位权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他变更"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他变更</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新仇旧恨"><span class="nav-number">3.</span> <span class="nav-text">新仇旧恨</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NavigationBar问题。"><span class="nav-number">3.1.</span> <span class="nav-text">NavigationBar问题。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIscrollView、UItableView、UICollectionView内容下沉问题。"><span class="nav-number">3.2.</span> <span class="nav-text">UIscrollView、UItableView、UICollectionView内容下沉问题。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xcode9-打出的包（iOS-11-SDK）页面卡顿问题"><span class="nav-number">3.3.</span> <span class="nav-text">Xcode9 打出的包（iOS 11 SDK）页面卡顿问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求定位框不弹出"><span class="nav-number">3.4.</span> <span class="nav-text">请求定位框不弹出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回按钮位置偏移问题"><span class="nav-number">3.5.</span> <span class="nav-text">返回按钮位置偏移问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他问题"><span class="nav-number">3.6.</span> <span class="nav-text">其他问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一笑泯恩仇"><span class="nav-number">4.</span> <span class="nav-text">一笑泯恩仇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#navigationBar-问题。"><span class="nav-number">4.1.</span> <span class="nav-text">navigationBar 问题。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIscrollView、UItableView、UICollectionView内容下沉问题"><span class="nav-number">4.2.</span> <span class="nav-text">UIscrollView、UItableView、UICollectionView内容下沉问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滚动卡顿问题"><span class="nav-number">4.3.</span> <span class="nav-text">滚动卡顿问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求定位框不弹出-1"><span class="nav-number">4.4.</span> <span class="nav-text">请求定位框不弹出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面跳动问题"><span class="nav-number">4.5.</span> <span class="nav-text">页面跳动问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按钮偏移问题"><span class="nav-number">4.6.</span> <span class="nav-text">按钮偏移问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">6.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小火炉-运</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://izhexi-com-1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://izhexi.com/category/适配iOS11/';
+          this.page.identifier = 'category/适配iOS11/';
+          this.page.title = '适配iOS11';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://izhexi-com-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
